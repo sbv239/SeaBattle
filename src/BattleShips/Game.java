@@ -1,5 +1,9 @@
 package BattleShips;
 
+import BattleShips.model.Player;
+import BattleShips.model.Point;
+import BattleShips.util.GameUtil;
+
 public class Game {
     private Player[] players;
 
@@ -8,9 +12,9 @@ public class Game {
     }
 
     public void start() {
-        players = GameSetup.createPlayers();
-        GameSetup.createShips(players[0]);
-        GameSetup.createShips(players[1]);
+        players = GameUtil.createPlayers();
+        GameUtil.createShips(players[0]);
+        GameUtil.createShips(players[1]);
     }
 
     public void play() {
@@ -74,8 +78,8 @@ public class Game {
         return player2;
     }
     private Point nextShot() {
-        int x = GameSetup.setCoordinate("X");
-        int y = GameSetup.setCoordinate("Y");
+        int x = GameUtil.setCoordinate("X");
+        int y = GameUtil.setCoordinate("Y");
         return new Point(x, y);
     }
 }

@@ -1,4 +1,4 @@
-package BattleShips;
+package BattleShips.model;
 
 public class Ship {
     private int deckCount;

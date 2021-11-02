@@ -1,10 +1,14 @@
-package BattleShips;
+package BattleShips.util;
+
+import BattleShips.model.Player;
+import BattleShips.model.Point;
+import BattleShips.model.Ship;
 
 import java.util.Map;
 import java.util.Scanner;
 
-public final class GameSetup {
-    private GameSetup() {
+public final class GameUtil {
+    private GameUtil() {
     }
 
     public static Player[] createPlayers() {
