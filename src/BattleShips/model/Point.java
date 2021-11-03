@@ -15,7 +15,6 @@ public class Point {
         return x;
     }
 
-
     public Integer getY() {
         return y;
     }

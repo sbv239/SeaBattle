@@ -56,14 +56,16 @@ public final class GameUtil {
 
         if (deck == 1 && isImposible(1, field, x, y)) {
             return false;
-        } else if (vector == 1) {
+        }
+        if (vector == 1) {
             for (int i = 0; i < deck; i++) {
                 if (isImposible(deck, field, x + i, y) || (x + deck > 11)) {
                     return false;
                 }
             }
-        } else if (vector == 2) {
-            for (int i = 0; i < deck - 1; i++) {
+        }
+        if (vector == 2) {
+            for (int i = 0; i < deck; i++) {
                 if (isImposible(deck, field, x, y + i) || (y + deck > 11)) {
                     return false;
                 }
@@ -163,7 +165,20 @@ public final class GameUtil {
         player.setShips(ships);
         player.setPersonalField(field);
         System.out.println("Корабль поставлен");
-        player.printField(field);
+        printField(player.getPersonalField());
+    }
+    public static void printField(char[][] field) {
+
+        for (int i = 1; i < field.length - 1; i++) {
+            for (int j = 1; j < field.length - 1; j++) {
+                if (field[i][j] == 0) {
+                    System.out.print(" |");
+                } else {
+                    System.out.print(field[i][j] + "|");
+                }
+            }
+            System.out.println();
+        }
     }
 }
 

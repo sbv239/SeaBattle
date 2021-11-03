@@ -28,34 +28,36 @@ public class Game {
             playerSecond = players[0];
         }
         System.out.println("Случайным образом мы определили, что первым ходить будет " + playerFirst.getName());
-        playGame(playerFirst, playerSecond);
+        Player winner = playGame(playerFirst, playerSecond);
+        System.out.println(winner.getName() + ", c победой. Ты красавчик!");
+        System.out.println("\nИгра окончена. До новых встреч.");
     }
 
     public Player playGame(Player player, Player opponent) {
         char[][] field = opponent.getOpponentField();
         if (player.getShips().size() == 0) {
-            return printResult(player, opponent);
+            return opponent;
         } else if (opponent.getShips().size() == 0) {
-            return printResult(opponent, player);
+            return player;
         }
         System.out.println(player.getName() + ", делайте ход");
-        opponent.printField(field);
+        GameUtil.printField(field);
         Point currentShot = nextShot();
         if (field[currentShot.getY()][currentShot.getX()] == 'o') {
             System.out.println(player.getName() + ", Вы уже сюда стреляли. Переход хода.");
-            opponent.printField(field);
+            GameUtil.printField(field);
             return playGame(opponent, player);
         }
         if (field[currentShot.getY()][currentShot.getX()] == 'X') {
             System.out.println(player.getName() + ", Вы уже сюда уже попадали. Будьте внимательнее. Переход хода.");
-            opponent.printField(field);
+            GameUtil.printField(field);
             return playGame(opponent, player);
         }
         if (!opponent.getShips().containsKey(currentShot)) {
             System.out.println("Мимо. Ход переходит к другому игроку");
             field[currentShot.getY()][currentShot.getX()] = 'o';
             opponent.setOpponentField(field);
-            opponent.printField(opponent.getOpponentField());
+            GameUtil.printField(opponent.getOpponentField());
             return playGame(opponent, player);
         }
         int shipLives = opponent.getShips().get(currentShot).getDeckCount() - 1;
@@ -68,14 +70,8 @@ public class Game {
         opponent.getShips().remove(currentShot);
         field[currentShot.getY()][currentShot.getX()] = 'X';
         opponent.setOpponentField(field);
-        opponent.printField(opponent.getOpponentField());
+        GameUtil.printField(opponent.getOpponentField());
         return playGame(player, opponent);
-    }
-
-    private Player printResult(Player player1, Player player2) {
-        player1.printField(player1.getOpponentField());
-        System.out.println("Ура, победил игрок по имени " + player2.getName());
-        return player2;
     }
     private Point nextShot() {
         int x = GameUtil.setCoordinate("X");

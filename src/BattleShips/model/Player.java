@@ -29,20 +29,6 @@ public class Player {
         this.personalField = personalField;
     }
 
-    public void printField(char[][] field) {
-
-        for (int i = 1; i < field.length - 1; i++) {
-            for (int j = 1; j < field.length - 1; j++) {
-                if (field[i][j] == 0) {
-                    System.out.print(" |");
-                } else {
-                    System.out.print(field[i][j] + "|");
-                }
-            }
-            System.out.println();
-        }
-    }
-
     public Map<Point, Ship> getShips() {
         return ships;
     }
